@@ -19,6 +19,23 @@ const userSchema = new mongoose.Schema({
   signupDate: {
     type: String,
   },
+  purchase: {
+    coinname: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    date: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: String,
+    },
+    price: {
+      type: String,
+    },
+  }
 })
 
 mongoose.model('User', userSchema)

@@ -31,8 +31,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/user/:email', (req, res) => {
-  const {email} = req.params 
-  User.findOne({email: email}).then(singleUser => res.status(200).json(singleUser))
+  const { email } = req.params
+  User.findOne({ email: email }).then(singleUser => res.status(200).json(singleUser))
+    .catch((err) => console.log(err))
+})
+
+app.patch('/user/:email', (req, res) => {
+  const { email } = req.params
+  const { purchase } = req.body
+  User.findOneAndUpdate({ email: email }, { purchase: purchase })
+    .then(user => res.status(200).send(user))
     .catch((err) => console.log(err))
 })
 
