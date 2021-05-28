@@ -1,4 +1,5 @@
 require('./models/userModel')
+require('./models/purchaseModel')
 require('dotenv').config()
 const express = require('express')
 const app = express()
@@ -9,6 +10,7 @@ app.use(express.json())
 
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
+const Purchase = mongoose.model('Purchase')
 
 const mongoUri = process.env.DATABASE
 mongoose.connect(mongoUri, {
@@ -45,6 +47,7 @@ app.post('/signup', (req, res) => {
     })
     .catch((err) => console.log(err))
 })
+
 app.post('/signin', (req, res) => {
   const { email, password } = req.body
   User.findOne({ email: email })
@@ -59,6 +62,18 @@ app.post('/signin', (req, res) => {
       if (!userExists) {
         return res.status(404).send({ error: 'User not found' })
       }
+    })
+    .catch((err) => console.log(err))
+})
+
+app.post('/purchase', (req, res) => {
+  const { coinname, date, quantity, price } = req.body
+  // console.log(req.body)
+  const purchase = new Purchase({ coinname, date, quantity, price })
+  purchase
+    .save()
+    .then(() => {
+      res.status(200).send('purchase was added')
     })
     .catch((err) => console.log(err))
 })

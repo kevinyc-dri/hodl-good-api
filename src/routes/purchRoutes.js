@@ -1,24 +1,21 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
-  email: {
+const purchaseSchema = new mongoose.Schema({
+  coinname: {
     type: String,
     unique: true,
     required: true,
   },
-  password: {
+  date: {
     type: String,
     required: true,
   },
-  firstName: {
+  quantity: {
     type: String,
   },
-  lastName: {
-    type: String,
-  },
-  signupDate: {
+  price: {
     type: String,
   },
 })
 
-mongoose.model('User', userSchema)
+mongoose.model('Purchase', userSchema)
