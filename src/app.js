@@ -26,6 +26,7 @@ mongoose.connection.on('connected', () => {
 app.listen('5000', () => {
   console.log('App is listening on port 5000')
 })
+
 app.get('/', (req, res) => {
   res.send('Welcome to Hodlgood Api')
 })
@@ -45,9 +46,9 @@ app.patch('/user/:email', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
-  const { email, password, firstName, lastName, signupDate } = req.body
+  const { email, password } = req.body
   console.log(req.body)
-  const user = new User({ email, password, firstName, lastName, signupDate })
+  const user = new User({ email, password })
   user
     .save()
     .then(() => {
