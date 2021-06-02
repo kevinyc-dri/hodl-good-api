@@ -6,8 +6,9 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  password: {
+  uid: {
     type: String,
+    unique: true,
     required: true,
   },
   firstName: {
@@ -20,14 +21,11 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   purchase: {
-    coinname: {
-      type: String,
-      unique: true,
-      required: true,
-    },
+    // coinname: {
+    //   type: String,
+    // },
     date: {
       type: String,
-      required: true,
     },
     quantity: {
       type: String,

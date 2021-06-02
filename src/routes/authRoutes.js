@@ -9,16 +9,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  firstName: {
-    type: String,
-  },
-  lastName: {
-    type: String,
-  },
-  signupDate: {
-    type: String,
-  },
+  }
 })
 
 mongoose.model('User', userSchema)

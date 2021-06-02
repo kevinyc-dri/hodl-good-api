@@ -46,9 +46,9 @@ app.patch('/user/:email', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
-  const { email, password } = req.body
+  const { email, uid } = req.body
   console.log(req.body)
-  const user = new User({ email, password })
+  const user = new User({ email, uid })
   user
     .save()
     .then(() => {
@@ -57,20 +57,21 @@ app.post('/signup', (req, res) => {
     .catch((err) => console.log(err))
 })
 
-app.post('/signin', (req, res) => {
-  const { email, password } = req.body
+app.post('/login', (req, res) => {
+  const { email, uid } = req.body
+  if (!email || !uid) {
+    return res
+      .status(422)
+      .send({ error: 'Must Provide email and password ' })
+  }
   User.findOne({ email: email })
     .then((userExists) => {
       // check if email and password is in object
-      if (!email || !password) {
-        return res
-          .status(422)
-          .send({ error: 'Must Provide email and password ' })
-      }
       // check if email exists in db
       if (!userExists) {
         return res.status(404).send({ error: 'User not found' })
       }
+      res.send(userExists)
     })
     .catch((err) => console.log(err))
 })
