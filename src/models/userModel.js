@@ -9,30 +9,6 @@ const userSchema = new mongoose.Schema({
   uid: {
     type: String,
     unique: true,
-    required: true,
-  },
-  firstName: {
-    type: String,
-  },
-  lastName: {
-    type: String,
-  },
-  signupDate: {
-    type: String,
-  },
-  purchase: {
-    // coinname: {
-    //   type: String,
-    // },
-    date: {
-      type: String,
-    },
-    quantity: {
-      type: String,
-    },
-    price: {
-      type: String,
-    },
   }
 })
 

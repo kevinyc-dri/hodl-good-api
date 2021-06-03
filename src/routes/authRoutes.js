@@ -1,15 +1,16 @@
+const express = require('express')
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  }
-})
+const router = express.Router()
 
-mongoose.model('User', userSchema)
+const User = mongoose.model('User')
+
+router.post('/signup', (req, res) => {
+  const { email, uid } = req.body
+  // console.log(req.body)
+  const user = new User({ email, uid })
+
+  user.save().then(() => {
+      res.status(200).send('user was saved')
+    }).catch((err) => console.log(err))
+})
