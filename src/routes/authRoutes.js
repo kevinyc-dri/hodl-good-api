@@ -7,7 +7,6 @@ const User = mongoose.model('User')
 
 router.post('/signup', (req, res) => {
   const { email, uid } = req.body
-  // console.log(req.body)
   const user = new User({ email, uid })
 
   user.save().then(() => {

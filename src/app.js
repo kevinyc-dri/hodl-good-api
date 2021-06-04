@@ -31,6 +31,9 @@ app.listen('5000', () => {
 app.get('/', (req, res) => {
   res.send('Welcome to Hodlgood Api')
 })
+// app.get('/users/', (req, res) => {
+//   User.findOne({ uid: req.params.userId }).then((thisUsers) => res.status(200).json(thisUsers))
+// })
 app.get('/users', (req, res) => {
   User.find().then((allUsers) => res.status(200).json(allUsers))
 })
@@ -52,8 +55,6 @@ app.post('/login', (req, res) => {
           .status(422)
           .send({ error: 'Must Provide email and password ' })
       }
-      // check if email and password is in object
-      // check if email exists in db
       if (!userExists) {
         return res.status(404).send({ error: 'User not found' })
       }
@@ -61,4 +62,20 @@ app.post('/login', (req, res) => {
     })
     .catch((err) => console.log(err))
 })
+app.get('/user/:uid', (req, res) => {
+  const { uid } = req.params
+  User.findOne({ uid: uid }).then(singleUser => res.status(200).json(singleUser))
+    .catch((err) => console.log(err))
+})
+app.patch('/user/:uid', (req, res) => {
+  const { uid } = req.params
+  const { purchase } = req.body
+  User.findOneAndUpdate({ uid: uid }, { $push: {purchases: purchase} })
+    .then(user => res.status(200).send(user))
+    .catch((err) => console.log(err))
+})
+
+
+
+
 

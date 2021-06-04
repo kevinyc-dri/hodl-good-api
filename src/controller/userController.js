@@ -17,3 +17,10 @@ exports.signup = (req, res) => {
     })
     .catch(err => console.log(err))
 }
+
+exports.getAllPurchases = (req, res) => {
+  User.find()
+    .then(allPurchases => res.status(200).json(allPurchases))
+    .catch(err => res.status)
+}
+

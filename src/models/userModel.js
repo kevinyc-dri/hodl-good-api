@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
   uid: {
     type: String,
     unique: true,
+  },
+  purchases: {
+    type: Array,
   }
 })
 
