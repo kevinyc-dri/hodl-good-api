@@ -1,4 +1,4 @@
-require('./models/UserModel')
+require('./models/userModel')
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
@@ -31,7 +31,7 @@ app.listen('5000', () => {
 app.get('/', (req, res) => {
   res.send('Welcome to Hodlgood Api')
 })
-// app.get('/users/', (req, res) => {
+// app.get('/users', (req, res) => {
 //   User.findOne({ uid: req.params.userId }).then((thisUsers) => res.status(200).json(thisUsers))
 // })
 app.get('/users', (req, res) => {
@@ -39,7 +39,6 @@ app.get('/users', (req, res) => {
 })
 app.post('/signup', (req, res) => {
   const { email, uid } = req.body
-  // console.log(req.body)
   const user = new User({ email, uid })
   user.save().then(() => {
     res.status(200).send('user was added')
@@ -49,7 +48,7 @@ app.post('/signup', (req, res) => {
 app.post('/login', (req, res) => {
   const { email, uid } = req.body
   User.findOne({ email: email })
-    .then((userExists) => {
+  .then((userExists) => {
       if (!email || !uid) {
         return res
           .status(422)
